@@ -20,4 +20,3 @@ jobs:
 
       - name: Print Go Version 
         run: echo go version
-        (exit 0)
