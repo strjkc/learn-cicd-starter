@@ -26,9 +26,6 @@ jobs:
     steps:
       - name: Format
         run: test -z $(go fmt ./...)
-      - name: Install Linter
-        run: go install honnef.co/go/tools/cmd/staticcheck@latest
-      - name: Run Linter
       - uses: dominikh/staticcheck-action@v1
         with:
           version: "latest"
