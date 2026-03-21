@@ -47,5 +47,5 @@ jobs:
         uses: "google-github-actions/auth@v2"
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
-      - working-directory: ../../
-        run: gcloud builds submit --project=cicd-490919 --tag us-central1-docker.pkg.dev/cicd-490919/notely-ar-repo/strjkc/notely:latest .
+      - run: pwd && ls -la
+      - run: gcloud builds submit --project=cicd-490919 --tag us-central1-docker.pkg.dev/cicd-490919/notely-ar-repo/strjkc/notely:latest .
