@@ -13,12 +13,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.25.0"
       - name: Build Project
         run: scripts/buildprod.sh
+      - name: db
+        run: ./scripts/migrateup.sh
       - id: "auth"
         uses: "google-github-actions/auth@v2"
         with:
