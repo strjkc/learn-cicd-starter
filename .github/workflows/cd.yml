@@ -19,8 +19,6 @@ jobs:
           go-version: "1.25.0"
       - name: Build Project
         run: scripts/buildprod.sh
-      - name: checkout
-        uses: actions/checkout@v4
       - id: "auth"
         uses: "google-github-actions/auth@v2"
         with:
@@ -32,11 +30,5 @@ jobs:
 
       - name: "Use gcloud CLI"
         run: "gcloud info"
-      - name: checkout
-        uses: actions/checkout@v4
-      - id: "auth"
-        uses: "google-github-actions/auth@v2"
-        with:
-          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
       - run: pwd && ls -la
       - run: gcloud builds submit --project=cicd-490919 --tag us-central1-docker.pkg.dev/cicd-490919/notely-ar-repo/strjkc/notely:latest .
