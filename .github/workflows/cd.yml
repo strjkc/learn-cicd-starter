@@ -42,4 +42,4 @@ jobs:
     needs: [build, setup-gcloud]
     steps:
       - name: Upload
-        run: gcloud builds submit --tag us-central1-docker.pkg.dev/cicd-490919/notely-ar-repo/strjkc/notely:latest .
+        run: gcloud builds submit --tag us-central1-docker.pkg.dev/cicd-490919/notely-ar-repo/strjkc/notely:latest ../../Dockerfile
