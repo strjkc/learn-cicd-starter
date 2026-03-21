@@ -32,3 +32,5 @@ jobs:
         run: "gcloud info"
       - run: pwd && ls -la
       - run: gcloud builds submit --project=cicd-490919 --tag us-central1-docker.pkg.dev/cicd-490919/notely-ar-repo/strjkc/notely:latest .
+      - name: Deploy to Cloud Run
+        run: gcloud run deploy notely --image us-central1-docker.pkg.dev/cicd-490919/notely-ar-repo/strjkc/notely:latest --allow-unauthenticated --project cicd-490919 --max-instances=4
