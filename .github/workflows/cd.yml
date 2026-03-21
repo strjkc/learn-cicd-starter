@@ -19,6 +19,7 @@ jobs:
   setup-gcloud:
     name: setup-gcloud
     runs-on: ubuntu-latest
+    needs: build
     permissions:
       contents: "read"
       id-token: "write"
