@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
@@ -30,8 +31,8 @@ func main() {
 		log.Printf("warning: assuming default configuration. .env unreadable: %v", err)
 	}
 
-	port := os.Getenv("PORT")
-	if port == "" {
+	port, err := strconv.Atoi(os.Getenv("PORT"))
+	if err != nil {
 		log.Fatal("PORT environment variable is not set")
 	}
 
@@ -89,10 +90,13 @@ func main() {
 
 	router.Mount("/v1", v1Router)
 	srv := &http.Server{
-		Addr:    ":" + port,
-		Handler: router,
+		Addr:        ":" + strconv.Itoa(port),
+		Handler:     router,
+		ReadTimeout: 5000000000,
 	}
-
-	log.Printf("Serving on port: %s\n", port)
-	log.Fatal(srv.ListenAndServe())
+	err = srv.ListenAndServe()
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Printf("Serving on port: %d\n", port)
 }
